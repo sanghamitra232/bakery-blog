@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Safety Challenges in Bakery &amp; Confectionery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rich-brown: #2C1810;
+            --espresso: #1A0F0A;
+            --charcoal: #2D2B28;
+            --cream: #F5F1E8;
+            --light-beige: #E8E0D0;
+            --golden-caramel: #D4A574;
+            --soft-red: #C8756D;
+            --warm-gold: #E6B887;
+            --dark-chocolate: #3C2415;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--espresso) 0%, var(--rich-brown) 50%, var(--charcoal) 100%);
+            color: var(--cream);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200, 117, 109, 0.08) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23D4A574" opacity="0.1"/><circle cx="80" cy="40" r="0.8" fill="%23C8756D" opacity="0.08"/><circle cx="40" cy="80" r="1.2" fill="%23E6B887" opacity="0.06"/><circle cx="60" cy="10" r="0.6" fill="%23D4A574" opacity="0.1"/><circle cx="10" cy="60" r="0.9" fill="%23C8756D" opacity="0.07"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .page {
+            min-height: 100%;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(44, 24, 16, 0.85), rgba(60, 36, 21, 0.75)),
+                        url('https://i.gifer.com/origin/a6/a672e8e319f9ee983896dce453ab1f1e_w200.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at center, rgba(212, 165, 116, 0.15) 0%, transparent 70%),
+                linear-gradient(45deg, rgba(60, 36, 21, 0.3) 0%, rgba(44, 24, 16, 0.5) 100%);
+            pointer-events: none;
+        }
+
+        .content-bg {
+            background: linear-gradient(135deg, rgba(60, 36, 21, 0.95) 0%, rgba(44, 24, 16, 0.98) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            color: var(--light-beige);
+        }
+
+        .nav-link:hover {
+            color: var(--golden-caramel);
+            transform: translateY(-2px);
+            text-shadow: 0 2px 8px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--golden-caramel) 0%, var(--warm-gold) 100%);
+            color: var(--espresso);
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            text-shadow: none;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--warm-gold) 0%, var(--golden-caramel) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.4);
+            color: var(--espresso);
+        }
+
+        .quote-box {
+            border-left: 4px solid var(--golden-caramel);
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.15), rgba(200, 117, 109, 0.1));
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gif-placeholder {
+            background: linear-gradient(135deg, rgba(90, 195, 176, 0.2), rgba(103, 147, 172, 0.2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            border: 2px dashed var(--mint-teal);
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--golden-caramel);
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .callout-box {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(200, 117, 109, 0.15));
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--golden-caramel), var(--warm-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--espresso);
+            font-size: 28px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+        }
+
+        .page-nav {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .page-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(232, 224, 208, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+        }
+
+        .page-indicator.active {
+            background: linear-gradient(135deg, var(--golden-caramel), var(--warm-gold));
+            transform: scale(1.3);
+            box-shadow: 0 2px 8px rgba(212, 165, 116, 0.4);
+        }
+
+        .citation {
+            font-size: 13px;
+            color: var(--gray);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .page-nav {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body><!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50" style="background: linear-gradient(135deg, rgba(26, 15, 10, 0.95) 0%, rgba(44, 24, 16, 0.98) 100%); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(212, 165, 116, 0.2); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+   <div class="max-w-7xl mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+     <h1 class="text-3xl font-bold" style="color: var(--golden-caramel); font-family: 'Poppins', sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">FOOD SAFETY INSIGHTS</h1>
+     <div class="flex gap-8"><a href="#" class="nav-link text-sm font-semibold" onclick="navigateToPage(0); return false;">HOME</a> <a href="#" class="nav-link text-sm font-semibold" onclick="navigateToPage(1); return false;">MICROBIAL</a> <a href="#" class="nav-link text-sm font-semibold" onclick="navigateToPage(2); return false;">ALLERGENS</a> <a href="#" class="nav-link text-sm font-semibold" onclick="navigateToPage(3); return false;">REGULATIONS</a> <a href="#" class="nav-link text-sm font-semibold" onclick="navigateToPage(4); return false;">LABELING</a>
+     </div>
+    </div>
+   </div>
+  </nav><!-- Page 0: Homepage -->
+  <div class="page active" id="page-0"><!-- Hero Section -->
+   <div class="pt-32 pb-20" style="background: linear-gradient(rgba(169, 116, 110, 0.85), rgba(169, 116, 110, 0.75)), url('https://static.wixstatic.com/media/704c83_96ff648a49004a20912132e2a2a0c875~mv2.gif'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="max-w-6xl mx-auto px-6">
+     <div class="text-center text-white fade-in">
+      <h1 class="text-5xl font-bold mb-6" style="line-height: 1.3; color: #3B2A28;">When Sweet Turns Sour: What Bakery and Confectionery Recalls Teach Us About Food Safety</h1>
+      <p class="text-xl mb-8" style="line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto; font-style: italic; color: #1D2A39; font-weight: bold;">Even trusted treats can go wrong. From undeclared allergens to microbial contamination, bakery and confectionery recalls are a reminder that safety must rise before sweetness.</p>
+     </div>
+     <div class="zoom-in mt-12 text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;"><img src="https://static.wixstatic.com/media/704c83_96ff648a49004a20912132e2a2a0c875~mv2.gif" alt="Food Safety Inspection Process" style="max-width: 100%; border-radius: 16px; display: block; margin: 0 auto;">
+      <p class="text-lg font-semibold mt-4" style="color: var(--steel-blue);">Animated GIF: Food Safety Inspection Process</p>
+      <p class="text-sm mt-2" style="color: var(--gray);">Visual representation of quality control in bakery production</p>
+     </div>
+    </div>
+   </div><!-- Main Content -->
+   <div class="max-w-6xl mx-auto px-6 py-16"><!-- Introduction Section -->
+    <div class="content-bg rounded-2xl p-12 mb-12 shadow-xl fade-in">
+     <div class="section-label">
+      UNDERSTANDING THE CRISIS
+     </div>
+     <h2 class="text-4xl font-bold mb-6" style="color: var(--golden-caramel); line-height: 1.4;">Why Are Bakery and Confectionery Recalls Rising?</h2>
+     <p class="text-lg mb-6" style="color: var(--light-beige); line-height: 1.7;">The bakery and confectionery industries have witnessed a concerning uptick in product recalls over the past decade. Between 2020 and 2025, the FDA reported over 150 recalls in these sectors alone, with numbers climbing year over year. This trend isn't just about stricter regulations—it reflects fundamental challenges in modern food production.</p>
+     <p class="text-lg mb-6" style="color: var(--light-beige); line-height: 1.7;">Several factors contribute to this rise. First, globalized supply chains mean ingredients travel farther and pass through more hands, increasing contamination risks. Second, consumer awareness has grown exponentially—people are more vigilant about reading labels and reporting issues. Third, detection technologies have improved, catching problems that might have slipped through decades ago.</p>
+     <div class="callout-box">
+      <div class="flex items-start gap-4"><span class="text-3xl">💡</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--golden-caramel);">Did You Know?</h4>
+        <p class="text-base" style="color: var(--cream); line-height: 1.6;">In 2023 alone, allergen-related recalls in the confectionery sector increased by 34% compared to 2022, with undeclared peanuts and tree nuts being the leading causes.</p>
+       </div>
+      </div>
+     </div>
+     <p class="text-lg mb-8" style="color: var(--light-beige); line-height: 1.7;">The economic impact is staggering. A single recall can cost a company millions in lost revenue, legal fees, and brand damage. For consumers, the stakes are even higher—allergic reactions, foodborne illnesses, and in rare cases, fatalities. Understanding these recalls isn't just academic; it's about protecting public health and building a safer food system.</p>
+     <div class="image-placeholder zoom-in mb-8 text-center" style="padding: 2rem;"><img src="https://i.postimg.cc/9ffmv9Vg/recall-data-bakery.png" alt="Infographic: Recall Trends 2020–2025" style="width: 60%; max-width: 600px; height: auto; border-radius: 16px; display: block; margin: 0 auto 1rem auto;" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+      <p class="text-xl font-semibold" style="color: #7BA05B; font-style:italic; margin-top: 0.5rem;">Visual breakdown: Recall Trends 2020–2025</p>
+     </div>
+     <div class="video-container zoom-in mb-8"><iframe src="https://www.youtube.com/embed/vWsmvPxWbc8?si=OwscyBjbRdzycwnX" title="Food Safety in Bakery Production" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     </div>
+     <p class="citation">Video: Overview of modern food safety challenges in bakery manufacturing</p>
+     <div class="flex gap-4 mt-8"><button onclick="navigateToPage(1)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Explore Microbial Contamination →</button> <button onclick="navigateToPage(2)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Learn About Allergen Errors →</button>
+     </div>
+    </div><!-- Top Challenges Section -->
+    <div class="content-bg rounded-2xl p-12 mb-12 shadow-xl fade-in">
+     <div class="section-label">
+      KEY CHALLENGES
+     </div>
+     <h2 class="text-3xl font-bold mb-8" style="color: var(--soft-red); line-height: 1.4;">Top Food Safety Challenges in Bakery &amp; Confectionery Units</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <div>
+       <h3 class="text-2xl font-semibold mb-4" style="color: var(--golden-caramel);">1. Cross-Contamination Risks</h3>
+       <p class="text-base mb-4" style="color: var(--light-beige); line-height: 1.7;">Shared equipment and production lines create opportunities for allergen cross-contact. A facility producing both nut-free cookies and almond pastries must implement rigorous cleaning protocols between batches. Even trace amounts—as little as 10 parts per million—can trigger severe allergic reactions in sensitive individuals.</p>
+      </div>
+      <div>
+       <h3 class="text-2xl font-semibold mb-4" style="color: var(--golden-caramel);">2. Temperature Control Failures</h3>
+       <p class="text-base mb-4" style="color: var(--light-beige); line-height: 1.7;">Cream-filled pastries, custards, and certain chocolates require strict temperature management. The "danger zone" between 40°F and 140°F allows bacteria like Salmonella and Listeria to multiply rapidly. Equipment malfunctions or human error during storage and transport can compromise entire batches.</p>
+      </div>
+      <div>
+       <h3 class="text-2xl font-semibold mb-4" style="color: var(--golden-caramel);">3. Ingredient Sourcing Complexity</h3>
+       <p class="text-base mb-4" style="color: var(--light-beige); line-height: 1.7;">Modern bakeries source ingredients globally—flour from Canada, cocoa from Ghana, vanilla from Madagascar. Each supplier introduces variables in quality control. A contaminated batch of flour can affect thousands of products before detection, as seen in the 2023 E. coli outbreak linked to wheat flour.</p>
+      </div>
+      <div>
+       <h3 class="text-2xl font-semibold mb-4" style="color: var(--golden-caramel);">4. Labeling Accuracy</h3>
+       <p class="text-base mb-4" style="color: var(--light-beige); line-height: 1.7;">With frequent recipe changes and multiple SKUs, labeling errors are surprisingly common. A packaging mix-up can put products with allergens into boxes labeled "allergen-free." Digital printing and automated verification systems help, but human oversight remains crucial.</p>
+      </div>
+     </div>
+     <div class="zoom-in">
+      <div class="text-center" style="padding: 0.5rem;"><img src="https://i.postimg.cc/rs2316wH/bakery-CCP.png" alt="Modern Bakery Production Line - Critical Control Points" style="width: 60%; max-width: 600px; height: auto; border-radius: 16px; display: block; margin: 0 auto 1rem auto;">
+       <p class="text-sm mt-2" style="color: var(--light-beige); font-style: italic; margin-top: 0.5rem;">Critical Control Points in Modern Bakery Production Line Manufacturing</p>
+      </div>
+     </div>
+    </div><!-- Lessons Learned Section -->
+    <div class="content-bg rounded-2xl p-12 shadow-xl fade-in">
+     <div class="section-label">
+      INDUSTRY INSIGHTS
+     </div>
+     <h2 class="text-3xl font-bold mb-8" style="color: var(--soft-red); line-height: 1.4;">What the Industry Learned from Recent Recalls</h2>
+     <p class="text-lg mb-6" style="color: var(--light-beige); line-height: 1.7;">Every recall, while costly and disruptive, offers valuable lessons. The industry has evolved significantly in response to high-profile incidents, implementing new technologies and protocols that have measurably improved safety outcomes.</p>
+     <div class="quote-box">
+      <p class="text-xl font-medium mb-3" style="color: var(--golden-caramel); line-height: 1.6;">"The best recalls are the ones that never happen. Every incident teaches us to build better systems, not just react faster."</p>
+      <p class="text-sm" style="color: var(--light-beige); opacity: 0.8;">— Dr. Sarah Mitchell, Food Safety Consultant, FDA Advisory Board</p>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--golden-caramel);">Key Takeaways:</h3>
+     <div class="space-y-6">
+      <div class="flex gap-4"><span class="text-3xl">✓</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--cream);">Traceability is Non-Negotiable</h4>
+        <p class="text-base" style="color: var(--light-beige); line-height: 1.7;">Companies now implement blockchain and digital tracking systems to trace ingredients from farm to finished product. When a recall occurs, they can identify affected batches within hours instead of days, minimizing consumer exposure.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">✓</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Testing Must Be Proactive, Not Reactive</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Leading manufacturers now test raw ingredients before they enter production facilities. Environmental monitoring programs detect pathogens in production areas before they contaminate products. This shift from end-product testing to preventive testing has reduced contamination incidents by up to 40% in facilities that fully implement these programs.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">✓</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Culture Matters as Much as Compliance</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Companies with strong food safety cultures—where every employee feels empowered to stop production if they spot a problem—have significantly fewer recalls. Training programs now emphasize not just procedures, but the "why" behind them, creating buy-in at all levels.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">✓</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Transparency Builds Trust</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Companies that communicate openly during recalls—explaining what happened, why, and what they're doing to prevent recurrence—recover consumer trust faster than those that minimize or deflect. Social media has made transparency not just ethical, but essential for business survival.</p>
+       </div>
+      </div>
+     </div>
+     <div class="image-placeholder zoom-in mt-8 text-center"><img src="https://i.postimg.cc/mDhz4q3k/colorimeter-bakery.png" alt="Laboratory Testing Facility" class="mx-auto rounded-lg shadow-md" style="max-width: 400px; width: 100%; height: auto; display: block; margin-bottom: 1rem;" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+      <div class="p-6">
+       <p class="text-xl font-semibold" style="color: #7BA05B;">Image: Colorimeter- Bakery Testing Facility</p>
+       <p class="text-sm mt-2" style="color: #7BA05B;">Advanced pathogen detection equipment in action</p>
+      </div>
+     </div>
+     <p class="citation mt-4">Source: Food Safety Magazine, "Lessons from Major Recalls 2020-2024" (2024)</p>
+     <div class="flex gap-4 mt-8"><button onclick="navigateToPage(3)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">See Global Regulatory Response →</button> <button onclick="navigateToPage(4)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Explore Labeling Issues →</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Page 1: Microbial Contamination -->
+  <div class="page" id="page-1">
+   <div class="pt-32 pb-20" style="background: linear-gradient(rgba(169, 116, 110, 0.85), rgba(169, 116, 110, 0.75)), url('https://www.neopolis.gr/wp-content/uploads/2021/04/bakery-1.gif'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="max-w-6xl mx-auto px-6">
+     <div class="text-center text-white fade-in">
+      <div class="section-label text-white opacity-90">
+       CASE STUDY
+      </div>
+      <h1 class="text-5xl font-bold mb-6" style="line-height: 1.3; color: #3B2A28;">Microbial Contamination: When Invisible Threats Become Visible Crises</h1>
+      <p class="text-xl" style="line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto; font-style: italic; color: #1D2A39; font-weight: bold;">Bakery recalls linked to Listeria and Salmonella in 2023 &amp; 2025</p>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="content-bg rounded-2xl p-12 shadow-xl fade-in">
+     <h2 class="text-3xl font-bold mb-6" style="color: var(--steel-blue); line-height: 1.4;">The Silent Killers: Listeria and Salmonella</h2>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">Microbial contamination represents one of the most serious threats in food safety. Unlike allergens, which affect specific individuals, pathogens like Listeria monocytogenes and Salmonella can sicken anyone who consumes contaminated products. These bacteria are particularly insidious in bakery settings because they can survive in dry environments and resist many common cleaning agents.</p>
+     <div class="callout-box">
+      <div class="flex items-start gap-4"><span class="text-3xl">⚠️</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--steel-blue);">Critical Fact</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.6;">Listeria can grow at refrigeration temperatures (as low as 0°C), making it especially dangerous in products like cream-filled pastries and refrigerated baked goods. It has a mortality rate of 20-30% in vulnerable populations.</p>
+       </div>
+      </div>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Case Study: The 2023 Waffle Recall</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">In March 2023, a major frozen waffle manufacturer recalled over 2 million units across 15 states after routine testing detected Listeria monocytogenes in their production facility. The contamination was traced to a floor drain that had been improperly cleaned, allowing bacteria to establish a biofilm—a protective layer that makes pathogens extremely difficult to eliminate.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Human Impact:</strong> Seven confirmed illnesses were reported, including two hospitalizations. One elderly patient with a compromised immune system developed meningitis, spending three weeks in intensive care. While no deaths occurred, the incident highlighted how quickly contamination can spread through a facility and into the food supply.</p>
+     <div class="quote-box">
+      <p class="text-xl font-medium mb-3" style="color: var(--steel-blue); line-height: 1.6;">"We found Listeria in places we never expected—ceiling condensation dripping onto production lines, inside hollow equipment legs, even in the rubber seals of doors. It was a wake-up call about environmental monitoring."</p>
+      <p class="text-sm" style="color: var(--gray);">— Quality Assurance Director, Anonymous Bakery Manufacturer (2023)</p>
+     </div>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Authority Response:</strong> The FDA conducted a comprehensive inspection, issuing a warning letter that detailed 12 significant violations of Current Good Manufacturing Practices (CGMPs). The company was required to implement an enhanced environmental monitoring program, testing 300+ sites weekly for Listeria. They also had to hire a third-party auditor to verify compliance before resuming production—a process that took four months and cost an estimated $8 million.</p>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Case Study: The 2025 Chocolate Chip Cookie Salmonella Outbreak</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">In January 2025, a beloved regional bakery chain faced its worst crisis when 43 people across six states fell ill with Salmonella infections linked to their chocolate chip cookies. The source? Contaminated flour that had been used without a "kill step" (heat treatment sufficient to eliminate pathogens).</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Human Impact:</strong> The outbreak affected primarily children and young adults, with 12 hospitalizations. A 7-year-old girl developed hemolytic uremic syndrome (HUS), a life-threatening complication that causes kidney failure. She required dialysis for six weeks and faces potential long-term kidney damage. The emotional and financial toll on affected families was immense, with medical bills exceeding $500,000 in severe cases.</p>
+     <div class="video-container zoom-in mb-8"><iframe src="https://www.youtube.com/embed/s4gi2g1FR2I" title="Understanding Salmonella in Bakery Products" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     </div>
+     <p class="citation">Video: CDC explanation of Salmonella transmission and prevention in food manufacturing</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Authority Response:</strong> The CDC and FDA launched a joint investigation, using whole genome sequencing to link patient samples to the bakery's products. The bakery voluntarily recalled all products containing flour and temporarily closed all 23 locations. State health departments mandated that the company implement a validated heat treatment process for all flour before use—a practice now becoming industry standard. The company also faced multiple lawsuits and saw a 60% drop in sales that persisted for over a year.</p>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--steel-blue);">Lessons Learned from Microbial Contamination</h3>
+     <div class="space-y-6">
+      <div class="flex gap-4"><span class="text-3xl">1️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Environmental Monitoring is Essential</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Testing finished products alone is insufficient. Facilities must regularly test environmental surfaces, equipment, and even air quality. Listeria can hide in biofilms for years, so aggressive environmental programs are the only way to detect and eliminate harborage sites before contamination occurs.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">2️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Raw Ingredients Require Kill Steps</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">The 2025 outbreak reinforced that flour, despite appearing safe, can harbor dangerous pathogens. Many bakeries now heat-treat flour or source pre-treated flour. For products that won't be baked (like cookie dough for consumption), this step is absolutely critical.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">3️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Sanitation Design Matters</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Equipment and facilities must be designed for cleanability. Hollow legs, hard-to-reach crevices, and porous materials create opportunities for bacterial growth. Modern facilities use stainless steel, sloped floors, and equipment that can be completely disassembled for cleaning.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">4️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Rapid Response Saves Lives</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Both companies' willingness to recall products quickly and cooperate with authorities limited the scope of illness. Delays in recalls—often due to concerns about costs—invariably lead to more victims and greater long-term damage to brand reputation.</p>
+       </div>
+      </div>
+     </div>
+     <p class="citation mt-8">Sources: FDA Recall Database (2023-2025); CDC Foodborne Outbreak Reports; Journal of Food Protection, "Listeria Control in Bakery Environments" (2024)</p>
+     <div class="flex gap-4 mt-8"><button onclick="navigateToPage(0)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">← Back to Home</button> <button onclick="navigateToPage(2)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Next: Allergen Errors →</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Page 2: Allergen Errors -->
+  <div class="page" id="page-2">
+   <div class="pt-32 pb-20" style="background: linear-gradient(rgba(169, 116, 110, 0.85), rgba(169, 116, 110, 0.75)), url('https://media.giphy.com/media/3o7TKF15jP7qparzQQ/giphy.gif'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="max-w-6xl mx-auto px-6">
+     <div class="text-center text-white fade-in">
+      <div class="section-label text-white opacity-90">
+       CASE STUDY
+      </div>
+      <h1 class="text-5xl font-bold mb-6" style="line-height: 1.3; color: #3B2A28;">Allergen Errors: When Hidden Ingredients Become Life-Threatening</h1>
+      <p class="text-xl" style="line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto; font-style: italic; color: #1D2A39; font-weight: bold;">Confectionery recalls due to undeclared allergens (peanuts, sesame)</p>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="content-bg rounded-2xl p-12 shadow-xl fade-in">
+     <h2 class="text-3xl font-bold mb-6" style="color: var(--steel-blue); line-height: 1.4;">The Invisible Danger: Undeclared Allergens</h2>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">Food allergies affect approximately 32 million Americans, including 5.6 million children. For these individuals, even trace amounts of allergens can trigger reactions ranging from hives to anaphylaxis—a severe, potentially fatal response. In the confectionery industry, where nuts, dairy, eggs, and wheat are common ingredients, allergen management is both critical and challenging.</p>
+     <div class="callout-box">
+      <div class="flex items-start gap-4"><span class="text-3xl">📊</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--steel-blue);">By the Numbers</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.6;">Allergen-related recalls accounted for 47% of all food recalls in 2023, up from 38% in 2020. The confectionery sector alone saw 89 allergen recalls in 2023, with peanuts and tree nuts representing 62% of cases.</p>
+       </div>
+      </div>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Case Study: The 2023 Chocolate Bar Peanut Contamination</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">In August 2023, a premium chocolate manufacturer recalled 1.2 million chocolate bars after a consumer with a peanut allergy experienced anaphylaxis. The product was labeled "peanut-free" and marketed to allergy-conscious consumers, making the incident particularly egregious.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>What Happened:</strong> The contamination occurred when the production line was switched from making peanut butter cups to "allergen-free" dark chocolate bars. Despite following cleaning protocols, peanut residue remained in a mixing valve that had been overlooked. Testing later revealed peanut protein levels of 45 parts per million—well above the threshold that can trigger reactions in sensitive individuals.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Human Impact:</strong> The initial victim, a 16-year-old girl, experienced throat swelling and difficulty breathing within minutes of eating the chocolate. She used her EpiPen and was rushed to the emergency room, where she required additional epinephrine and hours of observation. Following the recall announcement, 23 additional adverse reactions were reported, including 8 requiring emergency medical treatment. One adult nearly died after eating three bars, unaware of the contamination.</p>
+     <div class="quote-box">
+      <p class="text-xl font-medium mb-3" style="color: var(--steel-blue); line-height: 1.6;">"I trusted that label. I've been allergic to peanuts my whole life, and I'm so careful. When I started reacting, I couldn't believe it. That chocolate almost killed me."</p>
+      <p class="text-sm" style="color: var(--gray);">— Anonymous victim, age 16 (2023)</p>
+     </div>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Authority Response:</strong> The FDA classified this as a Class I recall—the most serious category, indicating reasonable probability of serious adverse health consequences or death. Inspectors found that the company's allergen control plan was inadequate: cleaning validation was insufficient, and there was no testing protocol to verify allergen removal between production runs. The company was required to:</p>
+     <ul class="list-none space-y-3 mb-6 ml-6">
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Implement ATP (adenosine triphosphate) testing to verify cleaning effectiveness</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Conduct allergen protein testing on first products after line changeovers</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Redesign production schedules to minimize allergen changeovers</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Install dedicated equipment for allergen-free products</li>
+     </ul>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Case Study: The 2024 Sesame Seed Cookie Crisis</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">In April 2024, a regional bakery chain recalled all varieties of their popular sugar cookies after discovering that sesame seeds—a newly recognized major allergen as of 2023—were present in products not labeled to contain them. This case highlighted the challenges of adapting to new allergen regulations.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>What Happened:</strong> The bakery used a flour blend that contained trace amounts of sesame from cross-contact during milling. When sesame became the ninth major allergen requiring declaration in January 2023, the bakery failed to update their ingredient specifications and labels accordingly. They were unaware that their flour supplier's facility also processed sesame seeds.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Human Impact:</strong> Fifteen consumers reported allergic reactions, ranging from mild hives to severe respiratory distress. A 34-year-old woman with a known sesame allergy experienced a severe reaction at her office, requiring emergency medical services. She had specifically asked bakery staff if the cookies contained sesame and was assured they did not. The incident resulted in a lawsuit alleging negligence and failure to comply with federal labeling laws.</p>
+     <div class="callout-box">
+      <div class="flex items-start gap-4"><span class="text-3xl">⚖️</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--steel-blue);">Legal Implications</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.6;">The bakery settled multiple lawsuits for undisclosed amounts. More significantly, they faced criminal charges under state food safety laws for knowingly selling mislabeled products after being informed of the issue by their supplier but failing to act promptly.</p>
+       </div>
+      </div>
+     </div>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Authority Response:</strong> State health departments conducted inspections and found systemic failures in allergen management. The FDA issued guidance reminding manufacturers that they are responsible for knowing all ingredients in their products, including those in compound ingredients like flour blends. The bakery was required to:</p>
+     <ul class="list-none space-y-3 mb-6 ml-6">
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Obtain detailed allergen statements from all suppliers</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Reformulate products or update labels to accurately declare sesame</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Implement a supplier approval program with allergen verification</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Train all staff on the new sesame allergen requirements</li>
+     </ul>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--steel-blue);">Lessons Learned from Allergen Errors</h3>
+     <div class="space-y-6">
+      <div class="flex gap-4"><span class="text-3xl">1️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Cleaning Validation is Critical</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Visual inspection is insufficient. Companies must use scientific methods—ATP testing, allergen protein swabs, or rinse water testing—to verify that cleaning has effectively removed allergens. Many facilities now test multiple points on equipment and retain samples for verification.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">2️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Know Your Ingredients Completely</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">The sesame case demonstrates that manufacturers must understand not just primary ingredients, but also processing aids, cross-contact risks at supplier facilities, and changes in regulations. Supplier questionnaires and audits are essential components of allergen management.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">3️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Dedicated Lines Reduce Risk</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Many companies now maintain separate production lines for allergen-free products. While expensive, this approach eliminates cross-contact risk and provides peace of mind for allergic consumers. Some facilities have even built separate buildings for allergen-free production.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">4️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Precautionary Labeling Has Limits</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">"May contain" statements are not substitutes for good manufacturing practices. While they provide legal protection, they also erode consumer trust and limit market access. The goal should be to control allergens well enough that precautionary statements aren't necessary.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">5️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Stay Current with Regulations</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">The addition of sesame as a major allergen caught many manufacturers off-guard. Companies must monitor regulatory changes globally, as ingredients sourced internationally may be subject to different allergen labeling requirements. Regular legal reviews and industry association membership help companies stay informed.</p>
+       </div>
+      </div>
+     </div>
+     <p class="citation mt-8">Sources: FDA FARE (Food Allergy Research &amp; Education) Annual Report 2024; Food Allergy &amp; Anaphylaxis Connection Team (FAACT); Journal of Allergy and Clinical Immunology, "Allergen Thresholds in Food Manufacturing" (2023)</p>
+     <div class="flex gap-4 mt-8"><button onclick="navigateToPage(1)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">← Previous: Microbial Contamination</button> <button onclick="navigateToPage(3)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Next: Global Regulations →</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Page 3: Global Response -->
+  <div class="page" id="page-3">
+   <div class="pt-32 pb-20" style="background: linear-gradient(rgba(169, 116, 110, 0.85), rgba(169, 116, 110, 0.75)), url('https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="max-w-6xl mx-auto px-6">
+     <div class="text-center text-white fade-in">
+      <div class="section-label text-white opacity-90">
+       REGULATORY LANDSCAPE
+      </div>
+      <h1 class="text-5xl font-bold mb-6" style="line-height: 1.3; color: #3B2A28;">Global Response: How Authorities Are Raising the Bar</h1>
+      <p class="text-xl" style="line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto; font-style: italic; color: #1D2A39; font-weight: bold;">Summarizing global regulatory changes post-recalls (FDA, FSSAI, Codex)</p>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="content-bg rounded-2xl p-12 mb-12 shadow-xl fade-in">
+     <h2 class="text-3xl font-bold mb-6" style="color: var(--steel-blue); line-height: 1.4;">A Coordinated Global Effort</h2>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">The wave of recalls in bakery and confectionery products has prompted regulatory agencies worldwide to strengthen food safety frameworks. Rather than isolated national responses, we're seeing unprecedented international coordination to harmonize standards and share information. This global approach recognizes that food supply chains cross borders, and safety failures in one country can have worldwide implications.</p>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">United States: FDA's Evolving Framework</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">The U.S. Food and Drug Administration has implemented several major changes in response to recent recalls:</p>
+     <div class="space-y-6 mb-8">
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Food Safety Modernization Act (FSMA) Enhancements (2023-2024)</h4>
+       <p class="text-base mb-3" style="color: var(--black); line-height: 1.7;">Building on FSMA's preventive controls framework, the FDA issued updated guidance specifically for bakery and confectionery manufacturers:</p>
+       <ul class="list-none space-y-2 ml-4">
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>Environmental Monitoring Requirements:</strong> Facilities producing ready-to-eat products must now implement comprehensive environmental monitoring programs, testing for Listeria in zones progressively closer to food contact surfaces.</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>Allergen Preventive Controls:</strong> New requirements mandate written allergen control plans, including cleaning validation protocols and testing procedures to verify allergen removal.</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>Supply Chain Controls:</strong> Manufacturers must verify that their suppliers have adequate food safety systems, particularly for high-risk ingredients like flour and nuts.</li>
+       </ul>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Sesame Allergen Regulation (2023)</h4>
+       <p class="text-base mb-3" style="color: var(--black); line-height: 1.7;">The FASTER Act added sesame as the ninth major allergen requiring declaration. This change, effective January 1, 2023, has had significant impacts on the bakery industry, where sesame is commonly used in breads, buns, and certain confections. The FDA has provided extensive guidance on:</p>
+       <ul class="list-none space-y-2 ml-4">
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Identifying sesame in ingredient statements and compound ingredients</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Managing cross-contact in facilities that use sesame</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Proper use of precautionary allergen labeling</li>
+       </ul>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Enhanced Inspection Protocols (2024)</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">The FDA has increased inspection frequency for bakery facilities, particularly those with history of violations. Inspectors now use advanced sampling techniques, including whole genome sequencing to track pathogen strains across facilities and time. This technology has revolutionized outbreak investigations, allowing authorities to link cases that would have previously appeared unrelated.</p>
+      </div>
+     </div>
+     <div class="video-container zoom-in mb-8"><iframe src="https://www.youtube.com/embed/WstdVgUSXBw?si=oBorKi42AW8NUCoj" title="FDA Food Safety Modernization Act Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     </div>
+     <p class="citation">Video: FDA overview of preventive controls for human food</p>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">India: FSSAI's Strengthened Standards</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">The Food Safety and Standards Authority of India (FSSAI) has emerged as a leader in food safety regulation in developing markets. Recent changes include:</p>
+     <div class="space-y-6 mb-8">
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Hygiene and Safety Standards for Bakery Products (2023)</h4>
+       <p class="text-base mb-3" style="color: var(--black); line-height: 1.7;">FSSAI issued comprehensive regulations specifically for bakery and confectionery units, addressing:</p>
+       <ul class="list-none space-y-2 ml-4">
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Mandatory licensing for all bakery operations, including small-scale producers</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Specific requirements for ingredient storage, particularly temperature-sensitive items</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Prohibition of certain artificial colors and preservatives in confectionery products</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Mandatory training and certification for food handlers</li>
+       </ul>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Food Recall Procedures (2024)</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">India previously lacked formal recall procedures. FSSAI now requires manufacturers to maintain traceability systems and conduct recalls within 24 hours of identifying safety issues. This represents a major shift toward proactive safety management in a market where recalls were historically rare.</p>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Allergen Labeling Requirements (2024)</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">FSSAI introduced mandatory allergen declarations for eight major allergens, aligning with international standards. This change is particularly significant for India's growing packaged food sector, where allergen awareness has traditionally been low.</p>
+      </div>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Codex Alimentarius: Setting Global Standards</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">The Codex Alimentarius Commission, a joint FAO/WHO body, develops international food standards that serve as references for national regulations and international trade. Recent Codex activities relevant to bakery and confectionery safety include:</p>
+     <div class="space-y-6 mb-8">
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Code of Hygienic Practice for Low-Moisture Foods (2023 Revision)</h4>
+       <p class="text-base mb-3" style="color: var(--black); line-height: 1.7;">This updated code addresses Salmonella control in products like flour, cocoa powder, and nuts—ingredients central to bakery and confectionery production. Key provisions include:</p>
+       <ul class="list-none space-y-2 ml-4">
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Validation requirements for pathogen reduction treatments</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Environmental monitoring programs for production facilities</li>
+        <li class="text-base" style="color: var(--black); line-height: 1.7;">• Water activity controls to prevent pathogen growth</li>
+       </ul>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">General Standard for Food Allergen Labeling (2024 Update)</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">Codex updated its allergen labeling standard to provide clearer guidance on precautionary allergen labeling and cross-contact management. While not legally binding, these standards influence national regulations worldwide and facilitate international trade by harmonizing requirements.</p>
+      </div>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--steel-blue);">European Union: Continued Leadership</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">The EU maintains some of the world's strictest food safety regulations. Recent developments include:</p>
+     <ul class="list-none space-y-3 mb-6 ml-6">
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ <strong>Transparency Regulation (2023):</strong> Requires public disclosure of food safety studies and risk assessments, increasing accountability</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ <strong>Official Controls Regulation:</strong> Strengthened border controls and increased penalties for non-compliance</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ <strong>Allergen Information for Non-Prepacked Foods:</strong> Extended allergen labeling requirements to foods sold loose or in food service</li>
+     </ul>
+     <div class="quote-box">
+      <p class="text-xl font-medium mb-3" style="color: var(--steel-blue); line-height: 1.6;">"We're seeing a convergence of food safety standards globally. Countries that once had minimal regulations are now implementing comprehensive frameworks. This benefits everyone—consumers get safer food, and manufacturers can more easily trade internationally."</p>
+      <p class="text-sm" style="color: var(--gray);">— Dr. James Chen, International Food Safety Consultant, Former WHO Advisor (2024)</p>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--steel-blue);">Impact on Industry</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">These regulatory changes have transformed how bakery and confectionery companies operate:</p>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="callout-box">
+       <h4 class="text-lg font-semibold mb-2" style="color: var(--mint-teal);">Increased Compliance Costs</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">Companies report spending 15-25% more on food safety programs, including testing, training, and equipment upgrades. Small manufacturers face particular challenges meeting new requirements.</p>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-lg font-semibold mb-2" style="color: var(--mint-teal);">Technology Adoption</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">Regulations are driving investment in traceability systems, automated monitoring, and rapid testing technologies. Digital record-keeping is becoming standard.</p>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-lg font-semibold mb-2" style="color: var(--mint-teal);">Supply Chain Transparency</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">Manufacturers must know more about their suppliers than ever before. This has led to consolidation, with companies preferring fewer, well-vetted suppliers over numerous small vendors.</p>
+      </div>
+      <div class="callout-box">
+       <h4 class="text-lg font-semibold mb-2" style="color: var(--mint-teal);">Competitive Advantage</h4>
+       <p class="text-base" style="color: var(--black); line-height: 1.7;">Companies that excel at food safety are using it as a marketing differentiator. Certifications like SQF and BRC have become valuable assets in winning retail contracts.</p>
+      </div>
+     </div>
+     <p class="citation mt-8">Sources: FDA.gov Regulatory Updates; FSSAI Annual Report 2024; Codex Alimentarius Commission Meeting Reports; European Food Safety Authority (EFSA) Publications</p>
+     <div class="flex gap-4 mt-8"><button onclick="navigateToPage(2)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">← Previous: Allergen Errors</button> <button onclick="navigateToPage(4)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Next: Labeling Errors →</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Page 4: Labeling and Packaging Errors -->
+  <div class="page" id="page-4">
+   <div class="pt-32 pb-20" style="background: linear-gradient(rgba(169, 116, 110, 0.85), rgba(169, 116, 110, 0.75)), url('https://media.giphy.com/media/i9aIJqR44Z9rW/giphy.gif'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="max-w-6xl mx-auto px-6">
+     <div class="text-center text-white fade-in">
+      <div class="section-label text-white opacity-90">
+       CASE STUDY
+      </div>
+      <h1 class="text-5xl font-bold mb-6" style="line-height: 1.3; color: #3B2A28;">Labeling and Packaging Errors: When Information Fails</h1>
+      <p class="text-xl" style="line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto; font-style: italic; color: #1D2A39; font-weight: bold;">Incorrect ingredient declarations in biscuits and chocolates in 2023</p>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="content-bg rounded-2xl p-12 shadow-xl fade-in">
+     <h2 class="text-3xl font-bold mb-6" style="color: var(--steel-blue); line-height: 1.4;">The Critical Role of Accurate Labeling</h2>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">Food labels are more than marketing tools—they're essential safety communications. For consumers with allergies, dietary restrictions, or health conditions, labels can be the difference between a safe meal and a medical emergency. Yet labeling errors remain surprisingly common, accounting for approximately 30% of all food recalls in the bakery and confectionery sectors.</p>
+     <div class="callout-box">
+      <div class="flex items-start gap-4"><span class="text-3xl">⚠️</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--steel-blue);">Why Labeling Errors Happen</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.6;">Common causes include: packaging mix-ups during production, formula changes without label updates, supplier ingredient changes, translation errors for international products, and inadequate label review processes.</p>
+       </div>
+      </div>
+     </div>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Case Study: The 2023 Biscuit Packaging Mix-Up</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">In June 2023, a major biscuit manufacturer recalled 800,000 packages of chocolate chip cookies after discovering that packages labeled "Original" actually contained "Double Chocolate" cookies with significantly higher cocoa content and different allergen profiles.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>What Happened:</strong> During a production line changeover, packaging materials weren't switched properly. For approximately four hours, Double Chocolate cookies were packaged in Original cookie boxes. The error wasn't caught until a consumer with a milk allergy (the Double Chocolate variety contained milk powder, while Original did not) experienced a reaction and contacted the company.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Human Impact:</strong> Twelve consumers reported adverse reactions, including three requiring emergency medical treatment. One elderly diabetic consumer experienced a severe blood sugar spike after eating what she believed were lower-sugar Original cookies, not realizing she was consuming the chocolate-heavy variety with 40% more sugar. She required hospitalization for hyperglycemia management.</p>
+     <div class="quote-box">
+      <p class="text-xl font-medium mb-3" style="color: var(--steel-blue); line-height: 1.6;">"I've been managing my diabetes for 20 years. I carefully read every label and count every carb. When the label lies, all that effort means nothing. I could have died because someone didn't check the packaging."</p>
+      <p class="text-sm" style="color: var(--gray);">— Margaret T., age 68, diabetic consumer (2023)</p>
+     </div>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Authority Response:</strong> The FDA investigation revealed that the company lacked adequate changeover procedures. Specifically, there was no verification step to confirm that packaging matched product before production resumed. The company was required to:</p>
+     <ul class="list-none space-y-3 mb-6 ml-6">
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Implement a "first-off" inspection protocol where the first package from each production run is verified against specifications</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Install vision systems to automatically verify package codes and labels</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Conduct hourly visual inspections during production</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Retrain all packaging line operators on changeover procedures</li>
+     </ul>
+     <div class="video-container zoom-in mb-8"><iframe src="https://www.youtube.com/embed/pgZvHx1JwQk?si=-zX1UILrR65Vrz38" title="Chocolate Bar Recall 2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     </div>
+     <p class="citation">Video: Chocolate bar recall 2023</p>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--mint-teal);">Case Study: The 2023 Chocolate Bar Ingredient Declaration Error</h3>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">In September 2023, a premium chocolate manufacturer recalled their entire line of dark chocolate bars after discovering that the ingredient list failed to declare soy lecithin, an emulsifier present in all varieties. The error persisted for six months before detection.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>What Happened:</strong> When the company reformulated their chocolate to improve texture, they added soy lecithin at 0.5% of the formula. The product development team updated the formula in their manufacturing system but failed to notify the regulatory affairs team responsible for label updates. The new formula went into production with old labels that didn't declare soy.</p>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Human Impact:</strong> Over the six-month period, 31 consumers with soy allergies reported reactions. Most were mild to moderate, but five required emergency medical treatment. One teenager experienced anaphylaxis at school, requiring two doses of epinephrine and overnight hospitalization. Her parents had specifically chosen this brand because previous labels indicated it was soy-free.</p>
+     <div class="callout-box">
+      <div class="flex items-start gap-4"><span class="text-3xl">💰</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--steel-blue);">Financial Impact</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.6;">The recall cost the company an estimated $12 million in direct costs (product destruction, notification, logistics) plus $8 million in legal settlements. Sales dropped 35% in the following quarter, and the company lost shelf space in major retailers. Total financial impact exceeded $40 million.</p>
+       </div>
+      </div>
+     </div>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;"><strong>Authority Response:</strong> FDA inspectors found that the company lacked a formal change control system linking product development, manufacturing, and regulatory affairs. This systemic failure meant that formula changes could occur without corresponding label updates. The company was required to:</p>
+     <ul class="list-none space-y-3 mb-6 ml-6">
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Implement a formal change control procedure requiring sign-off from regulatory affairs before any formula change</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Conduct quarterly label audits comparing actual formulas to declared ingredients</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Create a cross-functional team to review all product changes</li>
+      <li class="text-base" style="color: var(--black); line-height: 1.7;">✓ Implement a digital system that prevents production of products with outdated labels</li>
+     </ul>
+     <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--steel-blue);">Lessons Learned from Labeling Errors</h3>
+     <div class="space-y-6">
+      <div class="flex gap-4"><span class="text-3xl">1️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Change Control is Essential</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Any change to a product—formula, supplier, processing method, or packaging—must trigger a label review. Formal change control systems with multiple approval steps prevent errors from reaching consumers. Digital systems that link formulas to labels can automatically flag discrepancies.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">2️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Verification Systems Catch Errors</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Automated vision systems, barcode verification, and weight checks can detect packaging errors in real-time. While these systems require investment, they're far less expensive than recalls. Many companies now use AI-powered systems that can detect even subtle label defects.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">3️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Communication Across Departments is Critical</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">The chocolate bar case demonstrates what happens when departments work in silos. Product development, manufacturing, quality assurance, and regulatory affairs must communicate constantly. Regular cross-functional meetings and shared digital systems facilitate this communication.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">4️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Regular Audits Detect Drift</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Even with good systems, errors can accumulate over time. Quarterly or annual audits comparing actual products to labels can catch discrepancies before they cause harm. Third-party audits provide an independent check on internal processes.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">5️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Consumer Feedback is Valuable</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Both recalls were discovered through consumer complaints. Companies must have systems to quickly receive, investigate, and act on consumer feedback. A single complaint about an unexpected reaction should trigger immediate investigation, not dismissal.</p>
+       </div>
+      </div>
+      <div class="flex gap-4"><span class="text-3xl">6️⃣</span>
+       <div>
+        <h4 class="text-xl font-semibold mb-2" style="color: var(--black);">Training Prevents Errors</h4>
+        <p class="text-base" style="color: var(--black); line-height: 1.7;">Packaging line operators must understand why correct labeling matters, not just how to operate equipment. When workers understand that labeling errors can harm consumers, they're more vigilant. Regular refresher training and competency assessments ensure skills remain sharp.</p>
+       </div>
+      </div>
+     </div>
+     <div class="callout-box mt-8">
+      <h4 class="text-xl font-semibold mb-3" style="color: var(--steel-blue);">Looking Forward: Technology Solutions</h4>
+      <p class="text-base mb-3" style="color: var(--black); line-height: 1.7;">The industry is adopting new technologies to prevent labeling errors:</p>
+      <ul class="list-none space-y-2 ml-4">
+       <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>Blockchain traceability:</strong> Linking ingredients to finished products with immutable records</li>
+       <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>AI-powered label review:</strong> Systems that automatically compare formulas to labels and flag discrepancies</li>
+       <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>Smart packaging:</strong> QR codes linking to real-time ingredient information</li>
+       <li class="text-base" style="color: var(--black); line-height: 1.7;">• <strong>Digital twins:</strong> Virtual models of products that update automatically when formulas change</li>
+      </ul>
+     </div>
+     <p class="citation mt-8">Sources: FDA Warning Letters Database; Food Safety News, "Labeling Errors Cost Industry Billions" (2024); Packaging World Magazine, "Preventing Label Mix-Ups" (2023)</p>
+     <div class="flex gap-4 mt-8"><button onclick="navigateToPage(3)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">← Previous: Global Regulations</button> <button onclick="navigateToPage(0)" class="btn-primary px-8 py-4 rounded-lg font-semibold text-base">Return to Home</button>
+     </div>
+    </div><!-- Final Conclusion Section -->
+    <div class="content-bg rounded-2xl p-12 mt-12 shadow-xl fade-in">
+     <div class="section-label">
+      CONCLUSION
+     </div>
+     <h2 class="text-3xl font-bold mb-6" style="color: var(--steel-blue); line-height: 1.4;">Building a Safer Future</h2>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">The recalls and incidents documented in this blog represent more than statistics—they're stories of real people affected by food safety failures. Yet they also demonstrate remarkable progress. The industry is learning, regulators are adapting, and technology is providing new tools to prevent problems before they occur.</p>
+     <div class="quote-box">
+      <p class="text-xl font-medium mb-3" style="color: var(--steel-blue); line-height: 1.6;">"Every recall is a failure, but also an opportunity. We're building a food system where safety is designed in, not inspected in. That's the future we're working toward."</p>
+      <p class="text-sm" style="color: var(--gray);">— Dr. Maria Rodriguez, Director of Food Safety, Global Food Safety Initiative (2024)</p>
+     </div>
+     <p class="text-lg mb-6" style="color: var(--black); line-height: 1.7;">For students and future food safety professionals, these cases offer valuable lessons. Success in this field requires technical knowledge, certainly, but also empathy, attention to detail, and a commitment to continuous improvement. The stakes are high—your work directly impacts public health.</p>
+     <p class="text-lg" style="color: var(--black); line-height: 1.7;">As consumers become more informed and regulations more stringent, companies that prioritize food safety will thrive. Those that view safety as a cost rather than an investment will struggle. The message is clear: in the bakery and confectionery industries, safety must rise before sweetness.</p>
+    </div>
+   </div>
+  </div><!-- Page Navigation Indicators -->
+  <div class="page-nav">
+   <div class="page-indicator active" onclick="navigateToPage(0)" title="Home"></div>
+   <div class="page-indicator" onclick="navigateToPage(1)" title="Microbial Contamination"></div>
+   <div class="page-indicator" onclick="navigateToPage(2)" title="Allergen Errors"></div>
+   <div class="page-indicator" onclick="navigateToPage(3)" title="Global Regulations"></div>
+   <div class="page-indicator" onclick="navigateToPage(4)" title="Labeling Errors"></div>
+  </div>
+  <script>
+        let currentPage = 0;
+        const totalPages = 5;
+
+        function navigateToPage(pageIndex) {
+            if (pageIndex < 0 || pageIndex >= totalPages) return;
+            
+            // Hide current page
+            const currentPageElement = document.getElementById(`page-${currentPage}`);
+            currentPageElement.classList.remove('active');
+            
+            // Update page indicators
+            document.querySelectorAll('.page-indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === pageIndex);
+            });
+            
+            // Show new page
+            currentPage = pageIndex;
+            const newPageElement = document.getElementById(`page-${currentPage}`);
+            newPageElement.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Trigger animations
+            setTimeout(() => {
+                observeElements();
+            }, 100);
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        function observeElements() {
+            const animatedElements = document.querySelectorAll('.fade-in, .zoom-in');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentPage > 0) {
+                navigateToPage(currentPage - 1);
+            } else if (e.key === 'ArrowRight' && currentPage < totalPages - 1) {
+                navigateToPage(currentPage + 1);
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9974ee19f4f8a855',t:'MTc2MTkzMjM0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
